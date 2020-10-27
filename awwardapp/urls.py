@@ -6,3 +6,4 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns=[
     url('^$',views.index,name = 'home'),
+]
