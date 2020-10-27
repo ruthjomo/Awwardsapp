@@ -20,12 +20,12 @@ def index(request):
     # Default view
     projects = Project.objects.all()
     profiles = Profile.objects.all()
-    return render(request,'project/index.html', {'projects':projects, 'profiles':profiles})
+    return render(request,'index.html', {'projects':projects, 'profiles':profiles})
 
 # User profile view
 @login_required
 def profile(request):
-    return render(request,'project/profile.html')
+    return render(request,'profile.html')
 
 #specific project
 @login_required
@@ -44,10 +44,10 @@ def project(request,project_id):
         mean=np.mean(vote_mean)
         mean=round(mean,2)
         if mean:
-            return render(request, 'project/project.html',{'project':project,'votes':votes,'votes_list':votes_list,'mean':mean})
+            return render(request, 'project.html',{'project':project,'votes':votes,'votes_list':votes_list,'mean':mean})
 
         
-    return render(request, 'project/project.html',{'project':project,'votes':votes,'votes_list':votes_list})
+    return render(request, 'project.html',{'project':project,'votes':votes,'votes_list':votes_list})
 
 @login_required
 def new_project(request):
@@ -63,12 +63,12 @@ def new_project(request):
     else:
         form=PostProject()
         
-    return render(request,'project/new_project.html',{'form':form})
+    return render(request,'new_project.html',{'form':form})
 
 @login_required
 def posted_by(request, user_id):
     user=get_object_or_404(User,pk=user_id)
-    return render(request,'project/posted_by.html', {'user':user})
+    return render(request,'posted_by.html', {'user':user})
 
 def vote(request, project_id):
     project=get_object_or_404(Project, pk=project_id)
@@ -85,7 +85,7 @@ def vote(request, project_id):
     else:
         messages.warning(request,'ERROR! Voting Range is from 0-10')
         votes=Votes()     
-    return render(request, 'project/project.html',{'project':project,'votes':votes})
+    return render(request, 'project.html',{'project':project,'votes':votes})
 
 def signup(request):
     name = "Sign Up"
@@ -118,7 +118,7 @@ def search_project(request):
         message = f"{search_term}"
         projects = Project.objects.all()
         
-        return render(request, 'project/search.html', {"message": message, "projects": searched_projects})
+        return render(request, 'search.html', {"message": message, "projects": searched_projects})
 
     else:
         message = "You haven't searched for any term"
@@ -137,11 +137,11 @@ def update_profile(request):
     else:
         update_user=UpdateUser(instance=request.user)
         update_profile=UpdateProfile(instance=request.user.profile)
-    return render(request, 'project/update_profile.html',{'update_user':update_user,'update_profile':update_profile})
+    return render(request, 'update_profile.html',{'update_user':update_user,'update_profile':update_profile})
 
 # Api views
 def api(request):
-    return render(request,'project/api.html')
+    return render(request,'api.html')
 
 class ProjectList(APIView):
     def get(self,response,format=None):
