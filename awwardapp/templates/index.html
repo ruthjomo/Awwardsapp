@@ -1,11 +1,38 @@
-{%extends 'base.html'%}
+{% extends 'project/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{%static 'css/register.css'%}"  >
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+{% endblock %}
 
 {% block content %}
     {{block.super}}
-    <div class="container">
-        <h4>Welcome to my Projects Gallery</h4>
+    <!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="origin-when-cross-origin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Awwwards are the Website Awards that recognize and promote the talent and effort of the best developers, designers and web agencies in the world.">
+    <link rel="canonical" href="https://www.awwwards.com/" />
+    <meta name="theme-color" content="#3ea094">
+    <meta name="keywords" content="Website Awards, Web Design Inspiration, Webdesign Trends" >
+    <meta property="og:site_name" content="Awwwards">
+    <meta property="og:image" content="https://assets.awwwards.com/assets/images/pages/about-certificates/awwwards.jpg" />
+    <meta property="og:title" content="Awwwards - Website Awards - Best Web Design Trends" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.awwwards.com/" />
+    <meta property="og:description" content="Awwwards are the Website Awards that recognize and promote the talent and effort of the best developers, designers and web agencies in the world." />
+    <title>Awwwards - Website Awards - Best Web Design Trends</title>
+    "icon" href="https://assets.awwwards.com/assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="mask-icon" href="https://assets.awwwards.com/assets/images/favicon-safari.svg" color="#000000" />
+    <link rel="apple-touch-icon" href="https://www.awwwards.com/apple-touch-icon.png" />
+    <link rel="manifest" href="https://www.awwwards.com/manifest.json">
+        <style>
+            
         
-    </div>
-    
-
-{% endblock %}
