@@ -6,7 +6,7 @@ from .forms import PostProject,UpdateUser,UpdateProfile,SignUpForm
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import ProjectSerailizer,UserSerializer
+from .serializers import ProjectSerializer,UserSerializer
 from rest_framework import status
 from .permission import IsAdminOrReadOnly
 from django.http import HttpResponseRedirect
