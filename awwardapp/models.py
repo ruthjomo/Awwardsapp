@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
 
 # Models.
-class Project(models.Model):
+class  Project(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
-    image=models.ImageField(upload_to='media/', default='No image')
+    image=models.ImageField(upload_to='project/', default='No image')
     title=models.CharField(max_length=60)
     description=models.TextField()
     link=models.CharField(max_length=100)
@@ -22,6 +22,11 @@ class Project(models.Model):
     def get_project(cls, id):
         project=Project.objects.get(pk=id)
         return project
+
+    @classmethod
+    def search_project(cls, search_term):
+        user = cls.objects.filter(title__icontains=search_term)
+        return project 
     
     @classmethod   
     def delete_project(cls,delete_id):
@@ -38,6 +43,8 @@ class Votes(models.Model):
     def __str__(self):
         return self.user.username
     
+    def save_vote(self):
+        self.save()
     
 class Profile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
@@ -52,4 +59,3 @@ class Profile(models.Model):
     
     def save_profile(self):
         self.save()
-

@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http  import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile,Project,Votes
-from .forms import PostProject,UpdateUser,UpdateProfile,SignUpForm
+from .forms import PostProject,UpdateUser,UpdateProfile,SignUpForm,Votes
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -18,9 +18,9 @@ from django.contrib import messages
 # Index view
 def index(request):
     # Default view
-    projects = Project.objects.all()
+    project = Project.objects.all()
     profiles = Profile.objects.all()
-    return render(request,'index.html', {'projects':projects, 'profiles':profiles})
+    return render(request,'index.html', {'project':project, 'profiles':profiles})
 
 # User profile view
 @login_required
@@ -29,25 +29,28 @@ def profile(request):
 
 #specific project
 @login_required
-def project(request,project_id):
-    project=get_object_or_404(Project,pk=project_id)
-    votes=Votes()
-    votes_list=project.votes_set.all()
-    for vote in votes_list:
-        vote_mean=[]
-        usability=vote.usability
-        vote_mean.append(usability)
-        content=vote.content
-        vote_mean.append(content)
-        design=vote.design
-        vote_mean.append(design)
-        mean=np.mean(vote_mean)
-        mean=round(mean,2)
-        if mean:
-            return render(request, 'project.html',{'project':project,'votes':votes,'votes_list':votes_list,'mean':mean})
+def project(request, id):
+    project= Project.objects.get(id=id)
+    votes= Votes.objects.all()
+    form=Voting()
 
-        
-    return render(request, 'project.html',{'project':project,'votes':votes,'votes_list':votes_list})
+    return render(request, 'project.html',{'project':project, 'votes':votes,'form':form, id:'id'})
+
+def vote(request, id):
+    project= Project.objects.get(id=id)
+    votes=Voting(request.POST)
+    if votes.is_valid():
+        vote=votes.save(commit=False)
+        vote.user=request.user
+        vote.project=project
+        vote.save() 
+        messages.success(request,'Votes Successfully submitted')
+        return HttpResponseRedirect(reverse('project',  args=(id)))
+    
+    else:
+        messages.warning(request,'ERROR! Voting Range is from 0-10')
+        votes=Votes()     
+    return render(request, 'project.html', locals())
 
 @login_required
 def new_project(request):
@@ -69,23 +72,6 @@ def new_project(request):
 def posted_by(request, user_id):
     user=get_object_or_404(User,pk=user_id)
     return render(request,'posted_by.html', {'user':user})
-
-def vote(request, project_id):
-    project=get_object_or_404(Project, pk=project_id)
-    votes=Votes()
-    votes=Votes(request.POST)
-    if votes.is_valid():
-        vote=votes.save(commit=False)
-        vote.user=request.user
-        vote.project=project
-        vote.save() 
-        messages.success(request,'Votes Successfully submitted')
-        return HttpResponseRedirect(reverse('project',  args=(project.id,)))
-    
-    else:
-        messages.warning(request,'ERROR! Voting Range is from 0-10')
-        votes=Votes()     
-    return render(request, 'project.html',{'project':project,'votes':votes})
 
 def signup(request):
     name = "Sign Up"

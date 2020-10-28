@@ -1,9 +1,9 @@
-{% extends 'base.html'%}
 {% load bootstrap3 %} 
 {% load static %}
 {% block title%}
-{{user.username}}
+<!-- {{user.username}} -->
 {% endblock%}
+
 
 {% block styles %}
         {% bootstrap_css %}
@@ -12,13 +12,15 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 {% endblock %}
 
+
 {% block content%}
+{% include 'navbar.html' %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 col-lg-2"></div>
         <div class="col-md-8 col-lg-8 col-sm-10">
             <div class="card  mt-3">
-                <!-- new conatiner -->
+               
                 <div class="container-fluid" >
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-xs-12 ml-2 mt-2 ">
