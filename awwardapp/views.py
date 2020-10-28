@@ -98,8 +98,8 @@ def signup(request):
             send_mail(
             'Welcome to Awwards Gallery App.',
             f'Hello {name},\n '
-            'Welcome to Instagram App and have fun.',
-            'nyururukelvin99@gmail.com@gmail.com',
+            'Welcome to Awwards App and have fun.',
+            'ruthjomo19@gmail.com@gmail.com',
             [email],
             fail_silently=False,
             )

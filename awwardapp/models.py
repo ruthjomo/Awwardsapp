@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator,MinValueValidator
 # Models.
 class Project(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
-    image=models.ImageField(upload_to='project/', default='No image')
+    image=models.ImageField(upload_to='media/', default='No image')
     title=models.CharField(max_length=60)
     description=models.TextField()
     link=models.CharField(max_length=100)
