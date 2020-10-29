@@ -17,15 +17,18 @@
      <div class="col-md-2">
  
      </div>
-     
+     <div class="col-md-3" style="text-align: right;">
+       <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/phon.jpg' %}" class="img-fluid image"
+         style="margin-top:13%;height: 90%;">
+     </div>
      <div class="col-md-5">
  
        <div class="card" style="margin-top:7%;padding-left: 10%;border-radius:3%;">
  
          <div class="card-heading">
-          <h4>Awards Gallery</h4>
+          <h1 style="font-family: 'Grand Hotel', cursive;">Instagram</h1>
            {%if name%}
-           <strong><p class="text-secondary" style="font-size:15px;">{{name}} to see posted projects.</p></strong>
+           <strong><p class="text-secondary" style="font-size:15px;">{{name}} to see photos and videos from your friends.</p></strong>
            {%else%}
            <strong><p class="text-secondary" style="font-size:17px;">Login</p></strong>
            {%endif%}
