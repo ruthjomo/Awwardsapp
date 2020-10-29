@@ -23,9 +23,9 @@
       <div class="card" style="margin-top:7%;padding-left: 10%;border-radius:3%;">
 
         <div class="card-heading">
-            <h1 style="font-family: 'Grand Hotel', cursive;">Awwards App</h1>
+            <h4>Awards Gallery</h4>
           {%if name%}
-          <strong><p class="text-secondary" style="font-size:17px;">{{name}} to see photos and videos from your friends.</p></strong>
+          <strong><p class="text-secondary" style="font-size:17px;">{{name}} to see posted projects.</p></strong>
           {%else%}
           <strong><p class="text-secondary" style="font-size:17px;">Login</p></strong>
           {%endif%}
@@ -33,7 +33,7 @@
         {% if form.errors %}
         <p class="text-danger"> Some Information Might be Incorrect!!</p>
         {% endif %}
-        <form class="card-body" action="/accounts/login" method="post">
+        <form class="card-body" action="/accounts/login/" method="post">
           {% csrf_token %}
           {% for field in form %}
           <div class="fieldWrapper">
